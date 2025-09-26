@@ -1,1 +1,359 @@
-Hello!!!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Luke Berry's digital playground for experiments, side projects, and notes.">
+  <title>Luke Berry · Digital Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text: #f8fafc;
+      --text-muted: rgba(248, 250, 252, 0.7);
+      --card-bg: rgba(15, 23, 42, 0.6);
+      --card-border: rgba(148, 163, 184, 0.2);
+      --max-width: 1100px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.18), transparent 55%),
+                  radial-gradient(circle at 85% 10%, rgba(99, 102, 241, 0.18), transparent 45%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 1.1rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin-left: 1.5rem;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 5.5rem 1.5rem 4rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.4rem);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero p {
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .cta-group {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .cta {
+      padding: 0.85rem 1.7rem;
+      border-radius: 999px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .cta.primary {
+      background: var(--accent);
+      color: #0b1120;
+      box-shadow: 0 20px 35px -20px rgba(56, 189, 248, 0.65);
+    }
+
+    .cta.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px -18px rgba(56, 189, 248, 0.6);
+    }
+
+    .cta.secondary {
+      background: var(--accent-soft);
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.35);
+    }
+
+    .cta.secondary:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+    }
+
+    .section-content {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .text-muted {
+      color: var(--text-muted);
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+    }
+
+    .section-heading span {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      padding: 1.8rem;
+      border-radius: 1.2rem;
+      border: 1px solid var(--card-border);
+      background: var(--card-bg);
+      backdrop-filter: blur(16px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.7rem;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .future {
+      display: grid;
+      gap: 1rem;
+      margin-top: 2rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .future li {
+      padding: 1rem 1.2rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      background: rgba(15, 23, 42, 0.4);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 2rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav a {
+        margin: 0;
+      }
+
+      .cta-group {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .cta {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="brand">Luke Berry</div>
+    <div>
+      <a href="#projects">Experiments</a>
+      <a href="#lab-notes">Lab Notes</a>
+      <a href="#contact">Say Hi</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <h1>Welcome to the Playground.</h1>
+      <p>One domain, endless experiments. This will grow into a living hub for prototypes, tinkering with new stacks, and a personal knowledge base I can tap into from anywhere.</p>
+      <div class="cta-group">
+        <a class="cta primary" href="#projects">Explore the Lab</a>
+        <a class="cta secondary" href="#lab-notes">See what's next</a>
+      </div>
+    </header>
+
+    <section id="projects">
+      <div class="section-content">
+        <div class="section-heading">
+          <span>Projects</span>
+          <h2>Branches Off the Main Domain</h2>
+          <p class="text-muted">Each subdomain will host a new experiment. These slots are placeholders for whatever frameworks and ideas come next.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>playground.lukeberry.dev</h3>
+            <p>A React sandbox for UI ideas, component experiments, and quick iteration.</p>
+          </article>
+          <article class="card">
+            <h3>archive.lukeberry.dev</h3>
+            <p>Static mini-sites for micro projects, writing, or things that deserve their own space.</p>
+          </article>
+          <article class="card">
+            <h3>fx.lukeberry.dev</h3>
+            <p>WebGL, shaders, and visual experiments that push the browser a bit harder.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="lab-notes">
+      <div class="section-content">
+        <div class="section-heading">
+          <span>Lab Notes</span>
+          <h2>Roadmap & Ideas Queue</h2>
+        </div>
+        <ul class="future">
+          <li><strong>Cross-device notes</strong> · Plan an authenticated note-taking tool backed by a free tier DB (Supabase, Firebase, or Airtable) so I can jot ideas from mobile or desktop.</li>
+          <li><strong>Auth & identity</strong> · Set up Google auth with a serverless function to keep things simple but secure.</li>
+          <li><strong>Project deploy flow</strong> · Use GitHub Actions or simple scripts so each subdomain deploys independently without stress.</li>
+          <li><strong>Observability</strong> · Add basic analytics and uptime monitoring so I know what's working.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-content">
+        <div class="section-heading">
+          <span>Connect</span>
+          <h2>Reach Out or Follow Along</h2>
+          <p class="text-muted">Drop a note, send ideas, or share something worth building.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Email</h3>
+            <p><a href="mailto:hello@lukeberry.dev">hello@lukeberry.dev</a></p>
+          </article>
+          <article class="card">
+            <h3>GitHub</h3>
+            <p><a href="https://github.com/lukeberry" target="_blank" rel="noopener">github.com/lukeberry</a></p>
+          </article>
+          <article class="card">
+            <h3>Good vibes</h3>
+            <p>Working on something fun? I’m all ears — collaborations welcome.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-links">
+      <a href="mailto:hello@lukeberry.dev">Email</a>
+      <a href="https://github.com/lukeberry" target="_blank" rel="noopener">GitHub</a>
+      <a href="#lab-notes">Roadmap</a>
+    </div>
+    <div>© <span id="year"></span> Luke Berry · Crafted in the browser.</div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
