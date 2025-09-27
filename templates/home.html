@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luke Berry API Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --muted: rgba(226, 232, 240, 0.72);
+      --text: #f8fafc;
+      --border: rgba(148, 163, 184, 0.22);
+      --card: rgba(15, 23, 42, 0.55);
+      --max-width: 960px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.22), transparent 55%),
+        radial-gradient(circle at 90% 0%, rgba(236, 72, 153, 0.18), transparent 45%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 4.5rem 1.5rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(2.7rem, 6vw, 4rem);
+      margin: 0 0 1rem;
+    }
+
+    header p {
+      max-width: 620px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    main {
+      flex: 1;
+      width: 100%;
+    }
+
+    .section {
+      padding: 3rem 1.5rem;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 1.2rem 0 0.8rem;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+
+    p.lead {
+      margin: 0 0 2rem;
+      color: var(--muted);
+      max-width: 580px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      padding: 1.8rem;
+      border-radius: 1.1rem;
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(18px);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .endpoint {
+      padding: 1.2rem 1.4rem;
+      border-radius: 0.9rem;
+      border: 1px solid var(--border);
+      background: rgba(2, 6, 23, 0.6);
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .endpoint .method {
+      display: inline-block;
+      padding: 0.3rem 0.7rem;
+      border-radius: 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: rgba(59, 130, 246, 0.16);
+      color: #60a5fa;
+    }
+
+    .endpoint .summary {
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 2rem 1.5rem 3rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding: 3.5rem 1.1rem 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="pill">API Layer</span>
+    <h1>api.lukeberry.online</h1>
+    <p>Serving as the backbone for Luke Berry's experiments. Built with Flask, deployed on Render, and ready for Supabase-backed features.</p>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2>What This Service Powers</h2>
+        <p class="lead">This API will evolve alongside each subdomain on the playground. It keeps state, mediates auth, and exposes endpoints the front-end can rely on.</p>
+        <div class="grid">
+          {% for feature in features %}
+            <article class="card">
+              <h3>{{ feature.title }}</h3>
+              <p>{{ feature.description }}</p>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <span class="pill">Coming Online</span>
+        <h2>Endpoint Overview</h2>
+        <p class="lead">Route map for the first iteration. Helpful for quick checks while building out clients or testing with curl/Postman.</p>
+        <div class="grid">
+          {% for endpoint in endpoints %}
+            <article class="endpoint">
+              <span class="method">{{ endpoint.method }}</span>
+              <strong>{{ endpoint.path }}</strong>
+              <span class="summary">{{ endpoint.summary }}</span>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Deployed with ❤️ on Render · <a href="https://lukeberry.online" target="_blank" rel="noopener">Back to the playground</a>
+  </footer>
+</body>
+</html>
